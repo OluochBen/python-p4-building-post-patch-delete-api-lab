@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 from flask import Flask, request, make_response, jsonify
 from flask_migrate import Migrate
@@ -16,7 +15,6 @@ db.init_app(app)
 def home():
     return '<h1>Bakery GET-POST-PATCH-DELETE API</h1>'
 
-# -------------------- GET Routes --------------------
 
 @app.route('/bakeries')
 def bakeries():
@@ -42,7 +40,6 @@ def most_expensive_baked_good():
         return make_response({'error': 'No baked goods found'}, 404)
     return make_response(bg.to_dict(), 200)
 
-# -------------------- POST Route --------------------
 
 @app.route('/baked_goods', methods=['POST'])
 def create_baked_good():
@@ -59,7 +56,6 @@ def create_baked_good():
 
     return make_response(new_good.to_dict(), 201)
 
-# -------------------- PATCH Route --------------------
 
 @app.route('/bakeries/<int:id>', methods=['PATCH'])
 def update_bakery(id):
@@ -74,7 +70,6 @@ def update_bakery(id):
 
     return make_response(bakery.to_dict(), 200)
 
-# -------------------- DELETE Route --------------------
 
 @app.route('/baked_goods/<int:id>', methods=['DELETE'])
 def delete_baked_good(id):
@@ -87,7 +82,6 @@ def delete_baked_good(id):
 
     return make_response({'message': f'Baked good {id} deleted successfully'}, 200)
 
-# -------------------- Run Server --------------------
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
